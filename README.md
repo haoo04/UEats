@@ -15,7 +15,7 @@ The UEats Takeout Management System is a modern food delivery platform developed
 - ** Data Analytics**：Business reports, sales charts, user analysis
 - ** System Settings**：Basic configuration, parameter management
 
-### 用户端功能
+### User Features
 - ** User Authentication**：WeChat login, user registration
 - ** Shopping Cart**：Add items, adjust quantity, bulk operations
 - ** Address Management**：Manage delivery addresses, set default address

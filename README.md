@@ -7,20 +7,20 @@ The UEats Takeout Management System is a modern food delivery platform developed
 ## Features
 
 ### Admin Features
-- ** Employee Management**: Maintain employee info, permission control, login authentication
-- ** Category Management**: CRUD for dish and meal categories
-- ** Dish Management:**：Manage dish info, configure flavors, upload images
-- ** Meal Management**：Configure set meals, associate dishes, set prices
-- ** Order Management**：View orders, update status, statistics
-- ** Data Analytics**：Business reports, sales charts, user analysis
-- ** System Settings**：Basic configuration, parameter management
+- **Employee Management**: Maintain employee info, permission control, login authentication
+- **Category Management**: CRUD for dish and meal categories
+- **Dish Management:**：Manage dish info, configure flavors, upload images
+- **Meal Management**：Configure set meals, associate dishes, set prices
+- **Order Management**：View orders, update status, statistics
+- **Data Analytics**：Business reports, sales charts, user analysis
+- **System Settings**：Basic configuration, parameter management
 
 ### User Features
-- ** User Authentication**：WeChat login, user registration
-- ** Shopping Cart**：Add items, adjust quantity, bulk operations
-- ** Address Management**：Manage delivery addresses, set default address
-- ** Order & Payment**：WeChat Pay, order tracking
-- ** User Center**：Order history, manage personal info
+- **User Authentication**：WeChat login, user registration
+- **Shopping Cart**：Add items, adjust quantity, bulk operations
+- **Address Management**：Manage delivery addresses, set default address
+- **Order & Payment**：WeChat Pay, order tracking
+- **User Center**：Order history, manage personal info
 
 ## Tech Stack
 

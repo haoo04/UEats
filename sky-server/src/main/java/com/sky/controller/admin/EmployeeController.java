@@ -115,4 +115,29 @@ public class EmployeeController {
         employeeService.startOrStop(status,id);
         return Result.success();
     }
+
+    /**
+     * Query employee information by id
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("Query employee information by id")
+    public Result<Employee> getById(@PathVariable Long id){
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * Edit employee information
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("Edit employee information")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("Edit employee information: {}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }

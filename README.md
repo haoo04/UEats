@@ -47,7 +47,7 @@ The UEats Takeout Management System is a modern food delivery platform developed
 - **PWA Support**：Service Worker
 
 ### Deployment
-- **Web Server**：Nginx
+- **Web Server**：Nginx 1.20.2
 - **App Server**：Tomcat
 - **Database**：MySQL
 - **Cache**：Redis (optional)
@@ -106,23 +106,6 @@ sky:
     database: sky_take_out
     username: root        # Change to your DB username
     password: '1234'      # Change to your DB password
-```
-
-#### Configure Third-Party Services (Optional)
-
-##### WeChat Pay
-```yaml
-sky:
-  wechat:
-    appid: your-wechat-appid
-    secret: your-wechat-secret
-    mchid: your-merchant-id
-    mchSerialNo: your-merchant-serial-no
-    privateKeyFilePath: your-private-key-path
-    apiV3Key: your-api-v3-key
-    weChatPayCertFilePath: your-cert-path
-    notifyUrl: your-notify-url
-    refundNotifyUrl: your-refund-notify-url
 ```
 
 #### Start the Backend
@@ -187,6 +170,7 @@ npm run build
 # UAT/Staging build
 npm run build:uat
 ```
+### Or put the static resource in nginx-1.20.2 in your own nginx folder
 
 ### 3. Access the System
 
@@ -277,7 +261,7 @@ sky-take-out/
 | orders | Order table | id, number, status, user_id, amount |
 | order_detail | Order detail table | id, order_id, dish_id, setmeal_id, number |
 
-## 🔧 Configuration Notes
+## Configuration Notes
 
 ### Backend Configuration
 
@@ -335,7 +319,7 @@ module.exports = {
 }
 ```
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Frontend Issues
 

@@ -21,12 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 员工管理
+ * Employee management
  */
 @RestController
 @RequestMapping("/admin/employee")
 @Slf4j
-@Api(tags = "员工相关接口")
+@Api(tags = "Employee related interfaces")
 public class EmployeeController {
 
     @Autowired
@@ -35,19 +35,19 @@ public class EmployeeController {
     private JwtProperties jwtProperties;
 
     /**
-     * 登录
+     * Login
      *
      * @param employeeLoginDTO
      * @return
      */
     @PostMapping("/login")
-    @ApiOperation(value = "员工登录")
+    @ApiOperation(value = "Employee login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
-        log.info("员工登录：{}", employeeLoginDTO);
+        log.info("Employee login: {}", employeeLoginDTO);
 
         Employee employee = employeeService.login(employeeLoginDTO);
 
-        //登录成功后，生成jwt令牌
+        // After successful login, generate jwt token
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.EMP_ID, employee.getId());
         String token = JwtUtil.createJWT(
@@ -66,12 +66,12 @@ public class EmployeeController {
     }
 
     /**
-     * 退出
+     * Logout
      *
      * @return
      */
     @PostMapping("/logout")
-    @ApiOperation("员工退出")
+    @ApiOperation("Employee logout")
     public Result<String> logout() {
         return Result.success();
     }

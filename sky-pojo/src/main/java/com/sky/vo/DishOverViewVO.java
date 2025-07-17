@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 菜品总览
+ * Dish overview
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DishOverViewVO implements Serializable {
-    // 已启售数量
+    // Number of dishes in stock
     private Integer sold;
 
-    // 已停售数量
+    // Number of dishes out of stock
     private Integer discontinued;
 }

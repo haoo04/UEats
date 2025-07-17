@@ -13,15 +13,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class DishItemVO implements Serializable {
 
-    //菜品名称
+    // Dish name
     private String name;
 
-    //份数
+    // Number of servings
     private Integer copies;
 
-    //菜品图片
+    // Dish image
     private String image;
 
-    //菜品描述
+    // Dish description
     private String description;
 }

@@ -13,10 +13,10 @@ public class SetmealPageQueryDTO implements Serializable {
 
     private String name;
 
-    //分类id
+    // Category id
     private Integer categoryId;
 
-    //状态 0表示禁用 1表示启用
+    // Status 0: Disabled 1: Enabled
     private Integer status;
 
 }

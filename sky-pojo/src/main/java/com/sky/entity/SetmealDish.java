@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 套餐菜品关系
+ * Setmeal dish relationship
  */
 @Data
 @Builder
@@ -21,18 +21,18 @@ public class SetmealDish implements Serializable {
 
     private Long id;
 
-    //套餐id
+    // Setmeal id
     private Long setmealId;
 
-    //菜品id
+    // Dish id
     private Long dishId;
 
-    //菜品名称 （冗余字段）
+    // Dish name (redundant field)
     private String name;
 
-    //菜品原价
+    // Dish original price
     private BigDecimal price;
 
-    //份数
+    // Number of servings
     private Integer copies;
 }

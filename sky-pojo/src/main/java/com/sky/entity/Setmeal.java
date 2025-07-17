@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 套餐
+ * Setmeal
  */
 @Data
 @Builder
@@ -21,22 +21,22 @@ public class Setmeal implements Serializable {
 
     private Long id;
 
-    //分类id
+    // Category id
     private Long categoryId;
 
-    //套餐名称
+    // Setmeal name
     private String name;
 
-    //套餐价格
+    // Setmeal price
     private BigDecimal price;
 
-    //状态 0:停用 1:启用
+    // Status 0: Disabled 1: Enabled
     private Integer status;
 
-    //描述信息
+    // Description
     private String description;
 
-    //图片
+    // Image
     private String image;
 
     private LocalDateTime createTime;

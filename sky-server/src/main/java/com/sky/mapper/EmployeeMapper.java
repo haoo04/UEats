@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 public interface EmployeeMapper {
 
     /**
-     * 根据用户名查询员工
+     * Query employee by username
      * @param username
      * @return
      */
@@ -27,7 +27,7 @@ public interface EmployeeMapper {
     void insert(Employee employee);
 
     /**
-     * pagination query
+     * Pagination query
      * @param employeePageQueryDTO
      * @return
      */

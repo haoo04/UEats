@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 @Data
 public class OrdersPaymentDTO implements Serializable {
-    //订单号
+    // Order number
     private String orderNumber;
 
-    //付款方式
+    // Payment method
     private Integer payMethod;
 
 }

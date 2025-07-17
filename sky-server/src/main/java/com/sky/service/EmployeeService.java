@@ -9,7 +9,7 @@ import com.sky.result.PageResult;
 public interface EmployeeService {
 
     /**
-     * 员工登录
+     * Employee login
      * @param employeeLoginDTO
      * @return
      */

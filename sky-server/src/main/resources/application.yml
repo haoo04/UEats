@@ -37,3 +37,12 @@ sky:
     admin-ttl: 7200000
     # Set the token name passed from the front end
     admin-token-name: token
+  alioss:
+    endpoint: ${sky.alioss.endpoint}
+    access-key-id: ${sky.alioss.access-key-id}
+    access-key-secret: ${sky.alioss.access-key-secret}
+    bucket-name: ${sky.alioss.bucket-name}
+
+file:
+  # The image folder under your own project path
+  upload-path: D:\JetBrains\WorkSpace\Ueats_Practical\sky-take-out\sky-server\images\

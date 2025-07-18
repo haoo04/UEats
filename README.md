@@ -106,6 +106,20 @@ sky:
     database: sky_take_out
     username: root        # Change to your DB username
     password: '1234'      # Change to your DB password
+  
+  # If you need to use Ali OSS services, please enter your own API key
+  alioss:
+    endpoint:
+    access-key-id:
+    access-key-secret:
+    bucket-name:
+```
+Edit sky-server/src/main/resources/application.yml:
+
+```yaml
+file:
+# The image folder under your own project path
+upload-path: [your folder path]
 ```
 
 #### Start the Backend

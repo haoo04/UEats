@@ -67,6 +67,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        log.info("Start setting up static resource mapping");
+        String currentWorkingDir = System.getProperty("user.dir");
+        System.out.println("The absolute path of the current project is: "+ currentWorkingDir);
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:./sky-server/images/");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }

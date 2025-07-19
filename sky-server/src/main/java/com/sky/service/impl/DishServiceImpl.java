@@ -8,10 +8,12 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.entity.Setmeal;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
@@ -21,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +38,9 @@ public class DishServiceImpl implements DishService {
 
     @Autowired
     private SetmealDishMapper setmealDishMapper;
+
+    @Autowired
+    private SetmealMapper setmealMapper;
 
     /**
      * Add new dishes and corresponding flavors
@@ -97,9 +103,133 @@ public class DishServiceImpl implements DishService {
         }
 
         //Delete the dish data in the dish table
-        for(Long id : ids){
+        /*for(Long id : ids){
             dishMapper.deleteById(id);
             dishFlavorMapper.deleteByDishId(id);
+        }*/
+
+        //Batch delete dish data based on dish ID set
+        dishMapper.deleteByIds(ids);
+
+        //Batch delete the associated flavor data according to the dish ID set
+        dishFlavorMapper.deleteByDishIds(ids);
+    }
+
+    /**
+     * Query dishes by id
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO getByIdWithFlavor(Long id) {
+        //Query dish data by id
+        Dish dish = dishMapper.getById(id);
+
+        //Query flavor data based on dish id
+        List<DishFlavor> dishFlavorList = dishFlavorMapper.getByDishId(id);
+
+        //Encapsulate the queried data into vo
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavorList);
+
+        return dishVO;
+    }
+
+    /**
+     * Edit Dishes
+     * @param dishDTO
+     */
+    @Override
+    public void updateWithFlavor(DishDTO dishDTO) {
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+
+        //Modify basic information of dishes
+        dishMapper.update(dish);
+
+        //Delete the original flavor information
+        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+
+        //Re-insert flavor data
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if (flavors != null && flavors.size() > 0) {
+            flavors.forEach(dishFlavor -> dishFlavor.setDishId(dishDTO.getId()));
+
+            //Insert n data into the flavor table
+            dishFlavorMapper.insertBatch(flavors);
+        }
+
+    }
+
+    /**
+     * Query dishes by category id
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.list(dish);
+    }
+
+    /**
+     * Conditional query of dishes and flavors
+     * @param dish
+     * @return
+     */
+    @Override
+    public List<DishVO> listWithFlavor(Dish dish) {
+        List<Dish> dishList = dishMapper.list(dish);
+
+        ArrayList<DishVO> dishVOArrayList = new ArrayList<>();
+
+        dishList.forEach(d->{
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(d, dishVO);
+
+            //Query the corresponding flavor according to the dish id
+            List<DishFlavor> flavors = dishFlavorMapper.getByDishId(d.getId());
+
+            dishVO.setFlavors(flavors);
+            dishVOArrayList.add(dishVO);
+        });
+
+        return dishVOArrayList;
+    }
+
+    /**
+     * Dishes are on or off sale
+     * @param status
+     * @param id
+     */
+    @Override
+    @Transactional
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = Dish.builder()
+                .id(id)
+                .status(status)
+                .build();
+        dishMapper.update(dish);
+
+        if (status == StatusConstant.DISABLE) {
+            // If the sale is stopped, the set meal containing the current dish also needs to be stopped.
+            List<Long> dishIds = new ArrayList<>();
+            dishIds.add(id);
+            // select setmeal_id from setmeal_dish where dish_id in (?,?,?)
+            List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(dishIds);
+            if (setmealIds != null && setmealIds.size() > 0) {
+                for (Long setmealId : setmealIds) {
+                    Setmeal setmeal = Setmeal.builder()
+                            .id(setmealId)
+                            .status(StatusConstant.DISABLE)
+                            .build();
+                    setmealMapper.update(setmeal);
+                }
+            }
         }
     }
 }

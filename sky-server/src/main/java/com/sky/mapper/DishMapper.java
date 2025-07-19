@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface DishMapper {
 
@@ -49,4 +52,38 @@ public interface DishMapper {
      */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * Deleting dishes in batches
+     * @param ids
+     */
+    void deleteByIds(List<Long> ids);
+
+    /**
+     * Modify basic information of dishes
+     * @param dish
+     */
+    @AutoFill(OperationType.UPDATE)
+    void update(Dish dish);
+
+    /**
+     * Query dishes by category id
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
+
+    /**
+     * Query dishes by set meal ID
+     * @param id
+     * @return
+     */
+    List<Dish> getBySetmealId(Long id);
+
+    /**
+     * Count the number of dishes according to conditions
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
 }

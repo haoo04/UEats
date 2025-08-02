@@ -47,16 +47,34 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @return
      */
     @Bean
-    public Docket docket() {
+    public Docket docke1() {
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("UEats project interface documentation")
                 .version("2.0")
                 .description("UEats project interface documentation")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Admin Api")
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.admin"))
+                .paths(PathSelectors.any())
+                .build();
+        return docket;
+    }
+
+    @Bean
+    public Docket docket2() {
+        ApiInfo apiInfo = new ApiInfoBuilder()
+                .title("UEats project interface documentation")
+                .version("2.0")
+                .description("UEats project interface documentation")
+                .build();
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                .groupName("User Api")
+                .apiInfo(apiInfo)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.user"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;

@@ -13,7 +13,7 @@
     <!--Delete the dish data in the dish table-->
     <delete id="deleteByIds">
         delete from dish where id in
-        <foreach collection="ids" open="(" separator="," item="id">
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
             #{id}
         </foreach>
     </delete>

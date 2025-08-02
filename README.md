@@ -16,10 +16,10 @@ The UEats Takeout Management System is a modern food delivery platform developed
 - **System Settings**：Basic configuration, parameter management
 
 ### User Features
-- **User Authentication**：WeChat login, user registration
+- **User Authentication**：Login, user registration
 - **Shopping Cart**：Add items, adjust quantity, bulk operations
 - **Address Management**：Manage delivery addresses, set default address
-- **Order & Payment**：WeChat Pay, order tracking
+- **Order & Payment**：QR / Card Payment, order tracking
 - **User Center**：Order history, manage personal info
 
 ## Tech Stack
@@ -113,6 +113,12 @@ sky:
     access-key-id:
     access-key-secret:
     bucket-name:
+
+  redis:
+    host: localhost
+    port: 6379
+    password:           # Change to your DB password
+    database:           # Change to your selected database,default 0
 ```
 Edit sky-server/src/main/resources/application.yml:
 
